@@ -1,3 +1,5 @@
+const util = require("util");
+
 class BinaryNode {
   constructor(left, right, data) {
     this.left = left;
@@ -15,7 +17,6 @@ class BinarySearchTree {
     });
   }
 
-  //add_node
   addNode(node, parent = this.rootNode) {
     if (node.data >= parent.data) {
       if (parent.right) {
@@ -33,23 +34,28 @@ class BinarySearchTree {
   }
 
   printTree(currentNode = this.rootNode) {
-    console.log(`Root Node: ${currentNode.data}`);
+    console.log(`Node: ${currentNode.data}`);
     if (currentNode.left === null && currentNode.right === null) {
-      return;
+      return console.log("---this node has no children");
     }
-    if (currentNode.right) {
-      console.log(`Right: ${currentNode.right.data}`);
-      this.printTree(currentNode.right);
-    }
-    if (currentNode.left) {
-      console.log(`Left: ${currentNode.left.data}`);
-      this.printTree(currentNode.left);
+    if (currentNode.right || currentNode.left) {
+      if (currentNode.right) {
+        console.log(`---Right: ${currentNode.right.data}`);
+      }
+      if (currentNode.left) {
+        console.log(`---Left: ${currentNode.left.data}`);
+      }
+      if (currentNode.right) {
+        this.printTree(currentNode.right);
+      }
+      if (currentNode.left) {
+        this.printTree(currentNode.left);
+      }
     }
   }
 }
 
-//Testing
-
-let binaryTree = new BinarySearchTree([8, 10, 3, 1, 6, 6, 14, 4, 7, 13]);
-console.log(binaryTree);
+let binaryTree = new BinarySearchTree([8, 10, 3, 1, 6, 14, 4, 7, 13]);
+//console.log(binaryTree);
+//console.log(util.inspect(binaryTree, false, null));
 binaryTree.printTree();

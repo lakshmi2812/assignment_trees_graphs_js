@@ -8,10 +8,8 @@ class AdjacencyMatrix {
         this.maxId = edge[0].id;
       }
     });
-    //console.log(this.maxId);
     this.matrix = new Array(this.maxId + 2).fill([]);
     this.matrix = this.matrix.map(elem => new Array(this.maxId + 2).fill(0));
-    //console.log(this.matrix);
     this.matrix[0][0] = "";
     this.fillMatrix(list);
   }
