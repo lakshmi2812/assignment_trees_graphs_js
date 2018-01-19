@@ -9,7 +9,7 @@ class AdjacencyMatrix {
       }
     });
     this.matrix = new Array(this.maxId + 2).fill([]);
-    this.matrix = this.matrix.map(elem => new Array(this.maxId + 2).fill(0));
+    this.matrix = this.matrix.map(elem => new Array(this.maxId + 2).fill("X"));
     this.matrix[0][0] = "";
     this.fillMatrix(list);
   }
@@ -26,8 +26,35 @@ class AdjacencyMatrix {
         }
       });
     }
+
+    list.forEach(edge => {
+      this.matrix[edge[1].id + 1][edge[0].id + 1] = edge[2].toString();
+      this.matrix[edge[0].id + 1][edge[1].id + 1] = edge[2].toString();
+    });
   }
+
+  printMatrix() {
+    console.log("=========================================================");
+    console.log("==========Adjacency Matrix of Names and Weights==========");
+    console.log("=========================================================");
+    let arrText = "";
+    for (let i = 0; i < this.matrix[0].length; i++) {
+      while (this.matrix[i][0].length < 8) {
+        this.matrix[i][0] += " ";
+      }
+      for (let j = 0; j < this.matrix[0].length; j++) {
+        while (this.matrix[i][j].length < this.matrix[0][j].length) {
+          this.matrix[i][j] += " ";
+        }
+        arrText += this.matrix[i][j] + " | ";
+      }
+      console.log(arrText);
+      arrText = "";
+    }
+  }
+
+  edgeWeight(id1, id2, list) {}
 }
 
 const ourMatrix = new AdjacencyMatrix(edgeList);
-console.log(ourMatrix.matrix);
+ourMatrix.printMatrix();
