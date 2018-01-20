@@ -53,8 +53,18 @@ class AdjacencyMatrix {
     }
   }
 
-  edgeWeight(id1, id2, list) {}
+  edgeWeight(id1, id2) {
+    let weight = this.matrix[id1 + 1][id2 + 1];
+    console.log(
+      `The weight between ${this.matrix[id1 + 1][0].trim()} and ${this.matrix[
+        id2 + 1
+      ][0].trim()} is ${weight.trim()}.`
+    );
+    return weight;
+  }
 }
 
 const ourMatrix = new AdjacencyMatrix(edgeList);
 ourMatrix.printMatrix();
+ourMatrix.edgeWeight(1, 10);
+ourMatrix.edgeWeight(8, 16);
